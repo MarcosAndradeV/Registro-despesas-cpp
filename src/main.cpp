@@ -8,23 +8,20 @@ void adicionarDespesa(std::string nome, int valor) {
     file << nome << ":" << valor << "\n";
     file.close();
   } else {
-    std::cout << "Failed to open the file."
-              << std::endl; // Display an error message if file opening failed
+    std::cout << "Failed to open the file." << std::endl;
   }
 }
 void visualizarResumo() {
   std::ifstream file("despesas.txt");
   std::string line;
-  if (file.is_open()) { // Check if the file was successfully opened
-    std::cout << "Resumo:"
-              << std::endl; // Displaying a message indicating file content
-    while (std::getline(file, line)) {         // Read each line from the file
-      std::cout << " - " << line << std::endl; // Display each line of the file
+  if (file.is_open()) {
+    std::cout << "Resumo:" << std::endl;
+    while (std::getline(file, line)) {
+      std::cout << " - " << line << std::endl;
     }
-    file.close(); // Close the file
+    file.close();
   } else {
-    std::cout << "Failed to open the file."
-              << std::endl; // Display an error message if file opening failed
+    std::cout << "Failed to open the file." << std::endl;
   }
 }
 
