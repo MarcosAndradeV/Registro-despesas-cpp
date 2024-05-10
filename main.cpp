@@ -106,7 +106,7 @@ void removerDespesa(int index) {
       if (i == index) {
         cout << "Removendo: " << line << "\n";
       } else {
-        buf += line+"\n";
+        buf += line + "\n";
       }
       i++;
     }
@@ -135,10 +135,11 @@ void atualizarDespesa(int index, string new_name, int new_valor) {
   int i = 0;
   if (file.is_open()) {
     while (std::getline(file, line)) {
-      if (i == index)
+      if (i == index) {
         buf += new_name;
-      else
-        buf += line+"\n";
+      } else {
+        buf += line + "\n";
+      }
       i++;
     }
     if (i < index) {
