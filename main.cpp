@@ -1,58 +1,137 @@
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <string>
 
-void adicionarDespesa(std::string nome, int valor) {
+using std::cin;
+using std::cout;
+using std::string;
+
+void menu();
+void init_db(string);
+void adicionarDespesa(string nome, int valor);
+void visualizarResumo();
+void removerDespesa(int index);
+void atualizarDespesa(int index, string new_name, int new_valor);
+
+int main(int argc, char *argv[]) {
+  init_db("despesas.txt");
+  menu();
+  return 0;
+}
+
+void menu() {
+  int opt, valor, idx;
+  string nome;
+  do {
+    cout << "----------------------\n";
+    cout << "        MENU          \n";
+    cout << "----------------------\n";
+    cout << "1) Visualisar Dispesas\n";
+    cout << "2) Adicionar Dispesa  \n";
+    cout << "3) Remover Dispesa    \n";
+    cout << "4) Atualizar Dispesa  \n";
+    cout << "0) Sair               \n";
+    cin >> opt;
+    switch (opt) {
+    case 1:
+      visualizarResumo();
+      break;
+    case 2:
+      cout << "Digite o nome para a dispesa: ";
+      cin >> nome;
+      cout << "Digite o valor para a dispesa: ";
+      cin >> valor;
+      cout << "\n";
+      adicionarDespesa(nome, valor);
+      break;
+    case 3:
+      cout << "Digite o index da dispesa que deseja remover: ";
+      cin >> idx;
+      cout << "\n";
+      removerDespesa(idx);
+      break;
+    case 4:
+      cout << "Digite o index da dispesa que deseja atualizar: ";
+      cin >> idx;
+      cout << "Digite o novo nome para a dispesa: ";
+      cin >> nome;
+      cout << "Digite o novo valor para a dispesa: ";
+      cin >> valor;
+      cout << "\n";
+      atualizarDespesa(idx, nome, valor);
+      break;
+    }
+  } while (opt != 0);
+}
+void init_db(string nome) {
+  if (!std::filesystem::exists(nome)) {
+    std::ofstream file(nome);
+    if (file.is_open())
+      file.close();
+  }
+}
+void adicionarDespesa(string nome, int valor) {
   std::ofstream file("despesas.txt", std::ios::app);
   if (file.is_open()) {
     file << nome << ":" << valor << "\n";
     file.close();
   } else {
-    std::cout << "Failed to open the file." << std::endl;
+    cout << "Failed to open the file." << std::endl;
   }
 }
 void visualizarResumo() {
   std::ifstream file("despesas.txt");
-  std::string line;
+  int i = 0;
+  string line;
   if (file.is_open()) {
-    std::cout << "Resumo:" << std::endl;
+    cout << "Resumo:" << std::endl;
     while (std::getline(file, line)) {
-      std::cout << " - " << line << std::endl;
+      cout << i << " - " << line << std::endl;
+      i++;
     }
     file.close();
   } else {
-    std::cout << "Failed to open the file." << std::endl;
+    cout << "Failed to open the file." << std::endl;
   }
 }
 
 void removerDespesa(int index) {
   std::ifstream file("despesas.txt");
   std::ofstream ofile;
-  std::string line, buf;
+  string line, buf;
   int i = 0;
   if (file.is_open()) {
     while (std::getline(file, line)) {
-      if (i == index)
-        std::cout << "Removendo: " << line << "\n";
-      else
+      if (i == index) {
+        cout << "Removendo: " << line << "\n";
+      } else {
         buf += line;
+      }
       i++;
+    }
+    if (i < index) {
+      cout << "Index invalido nada foi removido\n";
+      buf += "\n";
     }
     file.close();
     ofile.open("despesas.txt");
-    if (ofile.is_open())
+    if (ofile.is_open()) {
       ofile << buf;
-    else
-      std::cout << "Error: Cannot open despesas.txt" << "\n";
+    } else {
+      cout << "Error: Cannot open despesas.txt"
+           << "\n";
+    }
     ofile.close();
   } else {
-    std::cout << "Error: Cannot open despesas.txt" << "\n";
+    cout << "Error: Cannot open despesas.txt"
+         << "\n";
   }
 }
-void atualizarDespesa(int index, std::string new_name, int new_valor) {
+void atualizarDespesa(int index, string new_name, int new_valor) {
   std::ifstream file("despesas.txt");
   std::ofstream ofile;
-  std::string line, buf;
+  string line, buf;
   new_name += ":" + std::to_string(new_valor) + "\n";
   int i = 0;
   if (file.is_open()) {
@@ -63,25 +142,20 @@ void atualizarDespesa(int index, std::string new_name, int new_valor) {
         buf += line;
       i++;
     }
+    if (i < index) {
+      cout << "Index invalido nada foi atualizado\n";
+      buf += "\n";
+    }
     file.close();
     ofile.open("despesas.txt");
     if (ofile.is_open())
       ofile << buf;
     else
-      std::cout << "Error: Cannot open despesas.txt" << "\n";
+      cout << "Error: Cannot open despesas.txt"
+           << "\n";
     ofile.close();
   } else {
-    std::cout << "Error: Cannot open despesas.txt" << "\n";
+    cout << "Error: Cannot open despesas.txt"
+         << "\n";
   }
-}
-
-int main(int argc, char *argv[]) {
-  adicionarDespesa("test1", 1);
-  adicionarDespesa("test2", 2);
-  visualizarResumo();
-  removerDespesa(0);
-  visualizarResumo();
-  atualizarDespesa(0, "test1", 3);
-  visualizarResumo();
-  return 0;
 }
