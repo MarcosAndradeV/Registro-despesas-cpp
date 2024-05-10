@@ -1,6 +1,6 @@
 # Registro-despesas-cpp
 
-`$ g++ src/main.cpp -o Registro && ./Registro`
+`$ g++ main.cpp -o build/Registro && ./build/Registro`
 
 ## Descrição:
   - Elabore um programa para ajudar os usuários a registrar suas despesas diárias. Os usuários devem ser capazes de adicionar novas despesas, remover despesas antigas, visualizar um resumo das despesas e atualizar informações sobre as despesas.
