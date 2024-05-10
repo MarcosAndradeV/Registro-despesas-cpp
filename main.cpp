@@ -106,13 +106,12 @@ void removerDespesa(int index) {
       if (i == index) {
         cout << "Removendo: " << line << "\n";
       } else {
-        buf += line;
+        buf += line+"\n";
       }
       i++;
     }
     if (i < index) {
       cout << "Index invalido nada foi removido\n";
-      buf += "\n";
     }
     file.close();
     ofile.open("despesas.txt");
@@ -139,12 +138,11 @@ void atualizarDespesa(int index, string new_name, int new_valor) {
       if (i == index)
         buf += new_name;
       else
-        buf += line;
+        buf += line+"\n";
       i++;
     }
     if (i < index) {
       cout << "Index invalido nada foi atualizado\n";
-      buf += "\n";
     }
     file.close();
     ofile.open("despesas.txt");
