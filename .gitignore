@@ -12,3 +12,5 @@ _deps
 build/*
 Registro
 despesas.txt
+nobuild
+nobuild.old

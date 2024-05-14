@@ -1,24 +1,4 @@
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <string>
-
-using std::cin;
-using std::cout;
-using std::string;
-
-void menu();
-void init_db(string);
-void adicionarDespesa(string nome, int valor);
-void visualizarResumo();
-void removerDespesa(int index);
-void atualizarDespesa(int index, string new_name, int new_valor);
-
-int main(int argc, char *argv[]) {
-  init_db("despesas.txt");
-  menu();
-  return 0;
-}
+#include "menu.h"
 
 void menu() {
   int opt, valor, idx;
@@ -95,7 +75,6 @@ void visualizarResumo() {
     cout << "Failed to open the file." << std::endl;
   }
 }
-
 void removerDespesa(int index) {
   std::ifstream file("despesas.txt");
   std::ofstream ofile;
