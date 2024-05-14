@@ -6,6 +6,7 @@ int main(void) {
   return 0;
 }
 
+//Qlq coisa
 
 void menu() {
   int opt, valor, idx;
