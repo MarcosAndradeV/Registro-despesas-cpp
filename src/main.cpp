@@ -19,7 +19,7 @@ void menu() {
     cout << "2) Adicionar Dispesa  \n";
     cout << "3) Remover Dispesa    \n";
     cout << "4) Atualizar Dispesa  \n";
-    cout << "0) Sair               \n";
+    cout << "5) Sair               \n";
     cin >> opt;
     switch (opt) {
     case 1:
@@ -50,7 +50,7 @@ void menu() {
       atualizarDespesa(idx, nome, valor);
       break;
     }
-  } while (opt != 0);
+  } while (opt != 5);
 }
 void init_db(string nome) {
   if (!std::filesystem::exists(nome)) {
