@@ -6,10 +6,9 @@ int main(void) {
   return 0;
 }
 
-//Qlq coisa
-
 void menu() {
-  int opt, valor, idx;
+  int opt, idx;
+  double valor;
   string nome;
   do {
     cout << "----------------------\n";
@@ -59,10 +58,10 @@ void init_db(string nome) {
       file.close();
   }
 }
-void adicionarDespesa(string nome, int valor) {
+void adicionarDespesa(string nome, double valor) {
   std::ofstream file("despesas.txt", std::ios::app);
   if (file.is_open()) {
-    file << nome << ":" << valor << "\n";
+    file << nome << ": R$" << valor << "\n";
     file.close();
   } else {
     cout << "Failed to open the file." << std::endl;
@@ -73,9 +72,9 @@ void visualizarResumo() {
   int i = 0;
   string line;
   if (file.is_open()) {
-    cout << "Resumo:" << std::endl;
+    cout << "Resumo: " << std::endl;
     while (std::getline(file, line)) {
-      cout << i << " - " << line << std::endl;
+      cout << i << " - "<< line << std::endl;
       i++;
     }
     file.close();
@@ -114,11 +113,11 @@ void removerDespesa(int index) {
          << "\n";
   }
 }
-void atualizarDespesa(int index, string new_name, int new_valor) {
+void atualizarDespesa(int index, string new_name, double new_valor) {
   std::ifstream file("despesas.txt");
   std::ofstream ofile;
   string line, buf;
-  new_name += ":" + std::to_string(new_valor) + "\n";
+  new_name += ": " + std::to_string(new_valor) + "\n";
   int i = 0;
   if (file.is_open()) {
     while (std::getline(file, line)) {
