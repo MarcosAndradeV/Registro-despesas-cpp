@@ -1,7 +1,9 @@
 # Registro-despesas-cpp
 
 ```
-$ g++ main.cpp -o Registro && ./Registro
+$ gcc -o nobuild nobuild.c
+$ ./nobuild.exe
+$ ./build/Registro
 ```
 
 ## Descrição:
