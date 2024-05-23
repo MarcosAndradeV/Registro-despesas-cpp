@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     if (!path_exists("build")){
         MKDIRS("build");
     }
-    CMD("g++", CFLAGS, "-o", "build/registro", "src/main.cpp");
+    CMD("g++", CFLAGS, "-o", "build/RegistroNobuild", "src/main.cpp", "src/menu.cpp");
 
     return 0;
 }
