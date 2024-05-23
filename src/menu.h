@@ -11,8 +11,8 @@ using std::string;
 
 void menu();
 void init_db(string);
-void adicionarDespesa(string nome, double valor);
+void adicionarDespesa(string nome, float valor);
 void visualizarResumo();
 void removerDespesa(int index);
-void atualizarDespesa(int index, string new_name, double new_valor);
+void atualizarDespesa(int index, string new_name, float new_valor);
 #endif // MENU_H

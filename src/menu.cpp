@@ -2,7 +2,7 @@
 
 void menu() {
   int opt, idx;
-  double valor;
+  float valor;
   string nome;
   do {
     cout << "----------------------\n";
@@ -52,7 +52,7 @@ void init_db(string nome) {
       file.close();
   }
 }
-void adicionarDespesa(string nome, double valor) {
+void adicionarDespesa(string nome, float valor) {
   std::ofstream file("despesas.txt", std::ios::app);
   if (file.is_open()) {
     file << nome << ": R$" << valor << "\n";
@@ -107,7 +107,7 @@ void removerDespesa(int index) {
          << "\n";
   }
 }
-void atualizarDespesa(int index, string new_name, double new_valor) {
+void atualizarDespesa(int index, string new_name, float new_valor) {
   std::ifstream file("despesas.txt");
   std::ofstream ofile;
   string line, buf;
