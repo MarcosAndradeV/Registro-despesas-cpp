@@ -9,6 +9,7 @@ using std::cin;
 using std::cout;
 using std::string;
 
+void show_menu();
 void menu();
 void init_db(string);
 void adicionarDespesa(string nome, float valor);

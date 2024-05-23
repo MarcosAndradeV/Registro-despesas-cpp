@@ -1,26 +1,29 @@
 #include "menu.h"
+#include <climits>
+#include <iostream>
+#include <string>
 
 void menu() {
   int opt, idx;
   float valor;
   string nome;
   do {
-    cout << "----------------------\n";
-    cout << "        MENU          \n";
-    cout << "----------------------\n";
-    cout << "1) Visualisar Dispesas\n";
-    cout << "2) Adicionar Dispesa  \n";
-    cout << "3) Remover Dispesa    \n";
-    cout << "4) Atualizar Dispesa  \n";
-    cout << "5) Sair               \n";
-    cin >> opt;
+    show_menu();
+    //cin >> opt;
+    while (!(cin >> opt)) {
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+        cout << "Opção invalida\n";
+        show_menu();
+    }
     switch (opt) {
     case 1:
       visualizarResumo();
       break;
     case 2:
       cout << "Digite o nome para a dispesa: ";
-      cin >> nome;
+      cin.ignore(INT_MAX, '\n');
+      std::getline(cin, nome);
       cout << "Digite o valor para a dispesa: ";
       cin >> valor;
       cout << "\n";
@@ -44,6 +47,17 @@ void menu() {
       break;
     }
   } while (opt != 5);
+}
+
+void show_menu(){
+    cout << "----------------------\n";
+    cout << "        MENU          \n";
+    cout << "----------------------\n";
+    cout << "1) Visualisar Dispesas\n";
+    cout << "2) Adicionar Dispesa  \n";
+    cout << "3) Remover Dispesa    \n";
+    cout << "4) Atualizar Dispesa  \n";
+    cout << "5) Sair               \n";
 }
 void init_db(string nome) {
   if (!std::filesystem::exists(nome)) {
