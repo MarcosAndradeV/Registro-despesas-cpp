@@ -3,7 +3,7 @@
 ```
 $ gcc -o nobuild nobuild.c
 $ ./nobuild.exe
-$ ./build/Registro
+$ ./build/Registro.exe
 ```
 
 ## Descrição:
