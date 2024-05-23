@@ -1,6 +1,9 @@
 #include "menu.h"
 #include <climits>
+#include <ios>
 #include <iostream>
+#include <filesystem>
+#include <fstream>
 #include <string>
 
 void menu() {
@@ -125,12 +128,13 @@ void atualizarDespesa(int index, string new_name, float new_valor) {
   std::ifstream file("despesas.txt");
   std::ofstream ofile;
   string line, buf;
-  new_name += ": " + std::to_string(new_valor) + "\n";
+  std::stringstream nl;
+  nl << new_name << ": R$" << new_valor << "\n";
   int i = 0;
   if (file.is_open()) {
     while (std::getline(file, line)) {
       if (i == index) {
-        buf += new_name;
+        buf += nl.str();
       } else {
         buf += line + "\n";
       }
